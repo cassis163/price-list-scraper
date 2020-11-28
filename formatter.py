@@ -20,13 +20,10 @@ def wrap_text(dir):
         for cell in row:
             if cell.value:
                 # Calculate the widths for each column
-                dimensions[cell.column_letter] = max(
-                    (dimensions.get(cell.column_letter, 0),
-                    min((
-                        len(str(cell.value))),
-                        20
-                    ))
-                )
+                dimensions[cell.column_letter] = max((
+                    dimensions.get(cell.column_letter, 0),
+                    len(str(cell.value))
+                ))
             
             cell.alignment = Alignment(horizontal='left')
 
@@ -65,7 +62,7 @@ def add_headers(dir, types):
             cell.value = _type
             cell.font = copy(worksheet['A1'].font)
 
-            thin = Side(border_style="thin", color="000000")
+            thin = Side(border_style=None)
             cell.border = Border(
                 top=thin,
                 bottom=thin,
