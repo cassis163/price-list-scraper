@@ -1,11 +1,10 @@
 import scraper
 import formatter
+import os
 from datetime import date
-from os import getcwd
-from subprocess import Popen
 
 file_name = date.today().strftime('%Y-%m-%d')
-file_dir = getcwd() + '/excel/' + file_name + '.xlsx'
+file_dir = os.getcwd() + '/excel/' + file_name + '.xlsx'
 
 df = scraper.get_dataframe()
 
@@ -16,4 +15,4 @@ formatter.wrap_text(file_dir)
 formatter.add_headers(file_dir, df['Soort'])
 
 # Open the Excel file in Microsoft Excel
-Popen(file_dir)
+os.system('start "excel" "%s"' % file_dir)
