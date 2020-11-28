@@ -51,12 +51,12 @@ def add_headers(dir, types):
 
             worksheet.move_range(
                 'A${0}:D${1}'.format(index + 1, worksheet.max_row),
-                rows=1
+                rows=2
             )
 
-            worksheet.merge_cells('A${0}:D${0}'.format(index + 1))
+            worksheet.merge_cells('A${0}:D${0}'.format(index + 2))
 
-            cell = worksheet['A${0}'.format(index + 1)]
+            cell = worksheet['A${0}'.format(index + 2)]
             cell.value = _type
             cell.font = copy(worksheet['A1'].font)
 
@@ -69,6 +69,6 @@ def add_headers(dir, types):
             )
 
             last_type = _type
-            offset += 1
+            offset += 2
     
     workbook.save(dir)
