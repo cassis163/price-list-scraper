@@ -22,14 +22,24 @@ def wrap_text(dir):
                 # Calculate the widths for each column
                 dimensions[cell.column_letter] = max((
                     dimensions.get(cell.column_letter, 0),
-                    len(str(cell.value))
+                    min((
+                        len(str(cell.value)),
+                        35
+                    ))
                 ))
             
             cell.alignment = Alignment(horizontal='left')
 
+            font = copy(cell.font)
+            font.size = 10
+            cell.font = font
+
     # Apply the widths for each column
     for column, value in dimensions.items():
         worksheet.column_dimensions[column].width = value
+
+    for index in range(worksheet.max_row):
+        worksheet.row_dimensions[index].height = 13
     
     workbook.save(dir)
 
