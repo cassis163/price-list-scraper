@@ -2,6 +2,10 @@ from openpyxl import load_workbook
 from openpyxl.styles import Alignment, Border, Side
 from openpyxl.utils import get_column_letter
 from copy import copy
+from difflib import SequenceMatcher
+
+def str_similarity(a, b):
+    return SequenceMatcher(None, a, b).ratio()
 
 def wrap_text(dir):
     '''
@@ -45,8 +49,9 @@ def add_headers(dir, types):
     for i in range(types.shape[0]):
         index = i + offset
         _type = types.iloc[i]
-        print(_type)
-        if _type != last_type:
+        
+        # Prevent duplicate headers by using the str_similarity function
+        if str_similarity(_type, last_type) < 0.9:
             # Add a header
 
             worksheet.move_range(
