@@ -4,7 +4,7 @@ from bs4 import BeautifulSoup
 
 def scrape():
     '''
-    Returns a BeautifulSoup result of the price list
+    Returns a BeautifulSoup result of the price list.
     '''
 
     html = get('http://www.zuidbos.nl/bestellijst.php').text
@@ -14,7 +14,7 @@ def scrape():
 
 def get_dataframe():
     '''
-    Returns the price list as a DataFrame
+    Returns the price list as a DataFrame.
     '''
 
     price_list = scrape()
